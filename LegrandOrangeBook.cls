@@ -573,8 +573,7 @@
 	{} % Theorem head font
 	{} % Punctuation after theorem head
 	{0.25em} % Space after theorem head
-	{\small\sffamily\bfseries\color{ocre}\thmname{#1}~\thmnumber{\@ifnotempty{#1}{}\@upn{#2}} % Theorem text (e.g. Theorem 2.1)
-	\thmnote{\the\thm@notefont\sffamily\bfseries\color{black}---~#3.\hspace{0.25em}}} % Optional theorem note
+	{\small\sffamily\bfseries\color{ocre}\thmname{#1}~} % Theorem text (e.g. Theorem 2.1)
 
 %------------------------------------------------
 
@@ -617,6 +616,9 @@
 \newtheorem{theoremeT}{Theorem}[chapter] % Theorems, the first argument is the theorem name, the second the theorem title used before the number and the third optional argument is whether to number under chapters (e.g. 2.1) or sections (e.g. 2.1.1)
 \newtheorem{problem}{Problem}[chapter] % Problems, the first argument is the theorem name, the second the theorem title used before the number and the third optional argument is whether to number under chapters (e.g. 2.1) or sections (e.g. 2.1.1)
 \newtheorem{exerciseT}{Exercise}[chapter] % Exercises, the first argument is the theorem name, the second the theorem title used before the number and the third optional argument is whether to number under chapters (e.g. 2.1) or sections (e.g. 2.1.1)
+\newtheorem{noteT}{Note}[chapter] % Exercises, the first argument is the theorem name, the second the theorem title used before the number and the third optional argument is whether to number under chapters (e.g. 2.1) or sections (e.g. 2.1.1)
+\newtheorem{terminologyT}{Terminology}[chapter] % Exercises, the first argument is the theorem name, the second the theorem title used before the number and the third optional argument is whether to number under chapters (e.g. 2.1) or sections (e.g. 2.1.1)
+\newtheorem{rememberT}{Keep in mind}[chapter] % Exercises, the first argument is the theorem name, the second the theorem title used before the number and the third optional argument is whether to number under chapters (e.g. 2.1) or sections (e.g. 2.1.1)
 
 % Black theorem number and optional black title no padding above and below
 \theoremstyle{blacknumex}
@@ -708,6 +710,9 @@
 % Creates an environment for each type of theorem and assigns it a theorem text style from the THEOREM STYLES block above and a colored box from above
 \newenvironment{theorem}{\begin{tBox}\begin{theoremeT}}{\end{theoremeT}\end{tBox}}
 \newenvironment{exercise}{\begin{eBox}\begin{exerciseT}}{\hfill{\color{ocre}\tiny\ensuremath{\blacksquare}}\end{exerciseT}\end{eBox}}
+\newenvironment{note}{\begin{eBox}\begin{noteT}}{\hfill{\color{ocre}\tiny\ensuremath{\blacksquare}}\end{noteT}\end{eBox}}
+\newenvironment{terminology}{\begin{eBox}\begin{terminologyT}}{\hfill{\color{ocre}\tiny\ensuremath{\blacksquare}}\end{terminologyT}\end{eBox}}
+\newenvironment{remember}{\begin{eBox}\begin{rememberT}}{\hfill{\color{ocre}\tiny\ensuremath{\blacksquare}}\end{rememberT}\end{eBox}}
 \newenvironment{definition}{\begin{dBox}\begin{definitionT}}{\end{definitionT}\end{dBox}}
 \newenvironment{example}{\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}}	
 \newenvironment{corollary}{\begin{cBox}\begin{corollaryT}}{\end{corollaryT}\end{cBox}}
