@@ -2,38 +2,184 @@
 \chapterspaceabove{6.75cm} % Whitespace from the top of the page to the chapter title on chapter pages
 \chapterspacebelow{7.25cm} % Amount of vertical whitespace from the top margin to the start of the text on chapter pages
 
-\chapter{Sectioning Examples}\index{Sectioning}
+\chapter{Introduction}
 
-\section{Section Title}\index{Sectioning!Sections}
-\begin{puyotikz}[\puyosmallscale]
-    \puyoboard{rg/rgr/br/g}{rr/rb/gg}
-    \puyomarker{e1rA/e2rA/f1bB/f2rB}
-\end{puyotikz}
+\section{What is Puyo Puyo?}
 
-\puyogrid[nrows=4, ncols=4]{bbb/rrrb/gggr/yyyg}
+If you've never played Puyo Puyo before, you might get the impression that it is a quirky ``version'' of another popular puzzle game, such as Tetris or Candy Crush. Be careful, though -- many Puyo players will take offense if you talk about it this way!
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit\footnote{Footnote example text\ldots Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent porttitor arcu luctus, imperdiet urna iaculis, mattis eros. Pellentesque iaculis odio vel nisl ullamcorper, nec faucibus ipsum molestie.}. Praesent porttitor arcu luctus, imperdiet urna iaculis, mattis eros. Pellentesque iaculis odio vel nisl ullamcorper, nec faucibus ipsum molestie. Sed dictum nisl non aliquet porttitor. Etiam vulputate arcu dignissim, finibus sem et, viverra nisl. Aenean luctus congue massa, ut laoreet metus ornare in. Nunc fermentum nisi imperdiet lectus tincidunt vestibulum at ac elit. Nulla mattis nisl eu malesuada suscipit.
+In fact, the goal of this section is to argue for the opposite: that Puyo Puyo is a \emph{very} unique game, and that beneath the surface lie many complexities which serve only to enrich the game and make it all the more interesting. Hopefully, this will encourage you to take a deeper dive, and explore Puyo Puyo for yourself.
 
-Aliquam arcu turpis, ultrices sed luctus ac, vehicula id metus. Morbi eu feugiat velit, et tempus augue. Proin ac mattis tortor. Donec tincidunt, ante rhoncus luctus semper, arcu lorem lobortis justo, nec convallis ante quam quis lectus. Aenean tincidunt sodales massa, et hendrerit tellus mattis ac. Sed non pretium nibh. Donec cursus maximus luctus. Vivamus lobortis eros et massa porta porttitor.
+\begin{note}
+    From now on, we'll refer to Puyo Puyo as just Puyo. There's no point in repeating ourselves, right?
+\end{note}
 
-\subsection{Subsection Title}\index{Sectioning!Subsections}
+\subsection{Basic elements}
 
-Fusce varius orci ac magna dapibus porttitor. In tempor leo a neque bibendum sollicitudin. Nulla pretium fermentum nisi, eget sodales magna facilisis eu. Praesent aliquet nulla ut bibendum lacinia. Donec vel mauris vulputate, commodo ligula ut, egestas orci. Suspendisse commodo odio sed hendrerit lobortis. Donec finibus eros erat, vel ornare enim mattis et. Donec finibus dolor quis dolor tempus consequat. Mauris fringilla dui id libero egestas, ut mattis neque ornare. Ut condimentum urna pharetra ipsum consequat, eu interdum elit cursus. Vivamus scelerisque tortor et nunc ultricies, id tincidunt libero pharetra. Aliquam eu imperdiet leo. Morbi a massa volutpat velit condimentum convallis et facilisis dolor.
+There are two elements that are indispensable for any Puyo game. The first is the \textbf{board}, which is just a grid where you can place puyos. The second is, well, the \textbf{puyos}! Here is an example of a board with a few puyos.
 
-In hac habitasse platea dictumst. Curabitur mattis elit sit amet justo luctus vestibulum. In hac habitasse platea dictumst. Pellentesque lobortis justo enim, a condimentum massa tempor eu. Ut quis nulla a quam pretium eleifend nec eu nisl. Nam cursus porttitor eros, sed luctus ligula convallis quis. Nam convallis, ligula in auctor euismod, ligula mauris fringilla tellus, et egestas mauris odio eget diam. Praesent sodales in ipsum eu dictum. Mauris interdum porttitor fringilla. Proin tincidunt sodales leo at ornare. Donec tempus magna non mauris gravida luctus. Cras vitae arcu vitae mauris eleifend scelerisque. Nam sem sapien, vulputate nec felis eu, blandit convallis risus. Pellentesque sollicitudin venenatis tincidunt. In et ipsum libero.
+\begin{figure}[h]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{rggpg/rgrp/brbp/bbp/pp/p}{pr/gg}
+    \end{puyotikz}
+\end{figure}
 
-\subsubsection{Subsubsection Title} \index{Sectioning!Subsubsections}
+We have a few things to unpack here, so bear with me. As you can see, this is a $6 \times 6$ board. You can fit one puyo onto each square. In most official game modes, you'll receive a $6 \times 13$ board to work with; however, since we're just getting started, a simpler board will suffice.
 
-Maecenas consectetur metus at tellus finibus condimentum. Proin arcu lectus, ultrices non tincidunt et, tincidunt ut quam. Integer luctus posuere est, non maximus ante dignissim quis. Nunc a cursus erat. Curabitur suscipit nibh in tincidunt sagittis. Nam malesuada vestibulum quam id gravida. Proin ut dapibus velit. Vestibulum eget quam quis ipsum semper convallis. Duis consectetur nibh ac diam dignissim, id condimentum enim dictum. Nam aliquet ligula eu magna pellentesque, nec sagittis leo lobortis. Aenean tincidunt dignissim egestas. Morbi efficitur risus ante, id tincidunt odio pulvinar vitae.
+The round shapes within the board are our puyos. Notice that puyos of the same color connect. The purples in row 4 are an example of that. This connective property will become very important soon, so keep it in mind!
 
-\paragraph{Paragraph Title}\index{Sectioning!Paragraphs} Nullam mollis tellus lorem, sed congue ipsum euismod a. Donec pulvinar neque sed ligula ornare sodales. Nulla sagittis vel lectus nec laoreet. Nulla volutpat malesuada turpis at ultricies. Ut luctus velit odio, sagittis volutpat erat aliquet vel. Donec ac neque eget neque volutpat mollis. Vestibulum viverra ligula et sapien bibendum, vel vulputate ex euismod. Curabitur nec velit velit. Aliquam vulputate lorem elit, id tempus nisl finibus sit amet. Curabitur ex turpis, consequat at lectus id, imperdiet molestie augue. Curabitur eu eros molestie purus commodo hendrerit. Quisque auctor ipsum nec mauris malesuada, non fringilla nibh viverra. Quisque gravida, metus quis semper pulvinar, dolor nisl suscipit leo, vestibulum volutpat ante justo ultrices diam. Sed id facilisis turpis, et aliquet eros.
+You've probably also noticed that there are two pairs (pieces) of puyos outside of the board. This is what we call a \textbf{piece preview}\index{Piece preview} -- it lets us know which pieces we'll receive next, and lets us improve our game plan. Typically, we receive the piece on top first, and then the piece at the bottom. There's no limit to the number of pieces we can receive -- it all depends on how long the game lasts!
 
-In malesuada ullamcorper urna, sed dapibus diam sollicitudin non. Donec elit odio, accumsan ac nisl a, tempor imperdiet eros. Donec porta tortor eu risus consequat, a pharetra tortor tristique. Morbi sit amet laoreet erat. Morbi et luctus diam, quis porta ipsum. Quisque libero dolor, suscipit id facilisis eget, sodales volutpat dolor. Nullam vulputate interdum aliquam. Mauris id convallis erat, ut vehicula neque. Sed auctor nibh et elit fringilla, nec ultricies dui sollicitudin. Vestibulum vestibulum luctus metus venenatis facilisis. Suspendisse iaculis augue at vehicula ornare. Sed vel eros ut velit fermentum porttitor sed sed massa. Fusce venenatis, metus a rutrum sagittis, enim ex maximus velit, id semper nisi velit eu purus.
+\begin{terminology}
+    In the example above, the second piece in the preview is made of two green puyos. I'll be referring to pieces like this as ``\textbf{double greens/reds/blues/etc.}\index{Terminology!Double piece}''
+\end{terminology}
 
-%------------------------------------------------
+\begin{note}
+    The letters and numbers in the example above are \textbf{not} present in most versions of the game. We'll make use of them in this compendium to make your life -- and mine -- easier. For instance, instead of saying ``the group of purples that look like an L on the right side of the board,'' we can just say ``the purples at \texttt{2e}.''
+\end{note}
 
-\section*{Unnumbered Section}
+\subsection{Chains}
 
-\subsection*{Unnumbered Subsection}
+In the previous section, I mentioned that puyos of the same color connect. There is a reason for this: when you connect four puyos of the same color, they pop! This is also true if you manage to make groups with five or more puyos.
 
-\subsubsection*{Unnumbered Subsubsection}
+This property of groups is crucial, since it allows us to build \textbf{chains}\index{Chain}. If you know a bit of chemistry, you're probably familiar with the concept of \emph{chain reactions}. Well, Puyo chains are very similar: if you pop the right group of puyos, others will follow suit, and soon you'll have popped dozens of puyos indirectly!
+
+Consider the following example. Here, we have 2 groups. There are the reds in row 1, the greens in row 2, and a lonely red in row 3. Our piece preview is giving us double reds and greens. What do we do here?
+
+\begin{figure}[h]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{rgr/rg/rg/}{rr/gg}
+    \end{puyotikz}
+\end{figure}
+
+Let's get the most obvious option out of the way. What happens if we connect our reds to the ones in row 1? One way to do it is as follows:
+
+\begin{figure}[H]
+    \centering
+    \href{https://www.puyo.gg/simulator/chain/mjrmctsv4r}{
+        \begin{puyotikz}[\puyobigscale]
+            \centering
+            \puyoboard[nrows=6, ncols=6, nhidrows=0]{rgr/rg/rg/rr}{gg}
+        \end{puyotikz}
+    }
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{gr/g/g}{gg}
+    \end{puyotikz}
+\end{figure}
+
+After we connect the 5 reds, the group pops. Because Puyo follows the laws of gravity, everything above this group falls to the bottom of the board, and we are left with the board state on the right. Very cool! So what?
+
+Well, actually, this is quite boring, right? There's nothing special about it. Let's take an alternative route. We'll begin by placing the reds on \texttt{4a}, and then we'll pop the greens instead, like this:
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{rgrrr/rg/rg}{gg}
+    \end{puyotikz}
+    \href{https://www.puyo.gg/simulator/chain/mjrofoqv2y}{
+        \begin{puyotikz}[\puyobigscale]
+            \centering
+            \puyoboard[nrows=6, ncols=6, nhidrows=0]{rgrrr/rg/rggg}{}
+        \end{puyotikz}
+    }
+\end{figure}
+
+Once the greens pop, we get this:
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{rrrr/r/r}{}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{}{}
+    \end{puyotikz}
+\end{figure}
+
+Great! With just one piece, we got rid of \emph{two} groups! On top of that, our board is now empty -- which, as we'll see, gives us an interesting advantage in competitive Puyo!
+
+\begin{terminology}
+    An \textbf{all clear}\index{Terminology!All Clear} (AC) happens when you pop all the puyos on your board, leaving it empty. Note that the empty board state at the start of a match doesn't count as an all clear!
+\end{terminology}
+
+At this point, you are saying one of two things:
+
+\begin{itemize}
+    \item ``I think I need a break, this is already too complicated for me.''
+    \item ``This is a game for babies! Do people really need a tutorial for this?''
+\end{itemize}
+
+If you're the first type of person, do take a break! Funnily enough, gravity is the first major roadblock you'll encounter in Puyo. It's perhaps the hardest thing to wrap your mind around, and even veterans make mistakes every now and then, which can mostly be traced back to gravity. Once your mind is at ease again, you can come back.
+
+Here is an exercise. Try to understand how these chains work:
+
+\begin{figure}[H]
+    \centering
+    \href{https://www.puyo.gg/simulator/chain/mjrmz0lh44}{
+        \begin{puyotikz}[\puyobigscale]
+            \centering
+            \puyoboard[nrows=6, ncols=3, nhidrows=0]{rgbgr/rgbb/rgb}{}
+        \end{puyotikz}
+    }
+    \href{https://www.puyo.gg/simulator/chain/mjrn02i161}{
+        \begin{puyotikz}[\puyobigscale]
+            \centering
+            \puyoboard[nrows=6, ncols=3, nhidrows=0]{rgbyyb/rgbyg/rgbyr}{}
+        \end{puyotikz}
+    }
+    \href{https://www.puyo.gg/simulator/chain/mjrodeqh4s}{
+        \begin{puyotikz}[\puyobigscale]
+            \centering
+            \puyoboard[nrows=6, ncols=4, nhidrows=0]{rrr/bbbr/gggb/g}{}
+        \end{puyotikz}
+    }
+    \href{https://www.puyo.gg/simulator/chain/mjroeaso2h}{
+        \begin{puyotikz}[\puyobigscale]
+            \centering
+            \puyoboard[nrows=6, ncols=4, nhidrows=0]{pprpg/pgrrr/ggpy/yyyppp}{}
+        \end{puyotikz}
+    }
+\end{figure}
+
+\begin{note}
+    If you click on one of the boards above, you'll be sent to \href{https://www.puyo.gg/simulator/}{\textbf{puyo.gg}}, a free simulator that allows you to build theoretical chains and practice. Another popular chainsim is \href{https://puyonexus.com/chainsim/}{\textbf{Puyo Nexus' chainsim}}. Pay attention to the board coordinates -- if they are orange, that means the board is clickable!
+\end{note}
+
+The first board is similar to what we've seen so far. The groups pop in the order $B \rightarrow G \rightarrow R$ -- blues, then greens, then reds; keep this notation in mind! This gives us a stronger chain than before, but it's now harder to build and read.
+
+The second board is more interesting. We add the yellows to our stack of groups, and the pop order is now $Y \rightarrow B \rightarrow G \rightarrow R$. Note that it's perfectly fine to put the green and the red on \texttt{5b} and \texttt{5c}. In fact, we can swap the positions of every puyo on top of the yellows, as long as the yellows still pop.
+
+The third board is an example of what we call \textbf{stairs}\index{Stairs}. Stairs consists of multiple pillars of puyos, stacked side by side, with the puyo that connects to the next group being placed on top of the previous group. Stairs is one of the easiest patterns to learn, which is why you'll often see beginners using it. The pop order here is $G \rightarrow B \rightarrow R$.
+
+The fourth board is the weirdest of them all. I urge you to click on it, if you're having trouble visualizing it. The pop order is $R \rightarrow P \rightarrow G \rightarrow Y \rightarrow P$.
+
+\begin{remember}
+    Hubris is one of your greatest enemies. Sometimes, you just have to watch a chain in action in order to understand what's going on. This is why watching Puyo matches is just as important as playing the game.
+\end{remember}
+
+I bet the game doesn't seem so simple now, does it? But don't think about those chains too much. For now, I want you to keep in mind that Puyo is all about gravity.
+
+Another thing I'd like to bring up is the fact that our vocabulary is quite limited right now. Let's remedy that. Other than weird shapes, you've probably noticed that the boards differ in terms of \textbf{chain length}. The chain length tells us how many groups have to be popped in sequence for a chain to \textbf{resolve} (finish). For example, the first board has pop order $B \rightarrow G \rightarrow R$. That's a sequence of 3 groups, so we have a \textbf{3-chain}. The other boards contain 4-, 3-, and 5-chains, respectively.
+
+Notice how I've been talking about \emph{sequences}. By that, I mean that two groups popping \emph{at the same time} constitute \emph{a singular part of the chain}. For example, the following chain is only a 2-chain, not a 3-chain.
+
+\begin{figure}[H]
+    \centering
+    \href{https://www.puyo.gg/simulator/chain/mjrp5ngl1v}{
+        \begin{puyotikz}[\puyobigscale]
+            \puyoboard[nrows=3, ncols=6, nhidrows=0]{bb/b/bgr/gr/gr/gr}{}
+        \end{puyotikz}
+    }
+\end{figure}
+
+So why am I talking about chain lengths? That's what we'll see next.
+
+\section{Game objective}
