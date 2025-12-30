@@ -36,7 +36,7 @@
 \documentclass[
 	openany,
 	12pt, % Default font size, select one of 10pt, 11pt or 12pt
-	fleqn, % Left align equations
+	%fleqn, % Left align equations
 	a4paper, % Paper size, use either 'a4paper' for A4 size or 'letterpaper' for US letter size
 	%oneside, % Uncomment for oneside mode, this doesn't start new chapters and parts on odd pages (adding an empty page if required), this mode is more suitable if the book is to be read on a screen instead of printed
 ]{LegrandOrangeBook}
@@ -58,6 +58,7 @@
 \chapterspaceabove{6.5cm} % Default whitespace from the top of the page to the chapter title on chapter pages
 \chapterspacebelow{6.75cm} % Default amount of vertical whitespace from the top margin to the start of the text on chapter pages
 
+\usepackage{graphbox}
 \usepackage{hyperref}
 
 \hypersetup{
@@ -70,6 +71,9 @@
 %----------------------------------------------------------------------------------------
 
 \begin{document}
+
+\newcommand{\icon}[1]{\includegraphics[align=c, scale=0.5]{Images/#1.png}}
+\interfootnotelinepenalty=10000
 
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE

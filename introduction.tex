@@ -33,7 +33,7 @@ The round shapes within the board are our puyos. Notice that puyos of the same c
 You've probably also noticed that there are two pairs (pieces) of puyos outside of the board. This is what we call a \textbf{piece preview}\index{Piece preview} -- it lets us know which pieces we'll receive next, and lets us improve our game plan. Typically, we receive the piece on top first, and then the piece at the bottom. There's no limit to the number of pieces we can receive -- it all depends on how long the game lasts!
 
 \begin{terminology}
-    In the example above, the second piece in the preview is made of two green puyos. I'll be referring to pieces like this as ``\textbf{double greens/reds/blues/etc.}\index{Terminology!Double piece}''
+    In the example above, the second piece in the preview is made of two green puyos. I'll be referring to pieces like this as ``\textbf{double greens/reds/blues/etc.}\index{Double piece}''
 \end{terminology}
 
 \begin{note}
@@ -107,7 +107,7 @@ Once the greens pop, we get this:
 Great! With just one piece, we got rid of \emph{two} groups! On top of that, our board is now empty -- which, as we'll see, gives us an interesting advantage in competitive Puyo!
 
 \begin{terminology}
-    An \textbf{all clear}\index{Terminology!All Clear} (AC) happens when you pop all the puyos on your board, leaving it empty. Note that the empty board state at the start of a match doesn't count as an all clear!
+    An \textbf{all clear}\index{All Clear} (AC) happens when you pop all the puyos on your board, leaving it empty. Note that the empty board state at the start of a match doesn't count as an all clear!
 \end{terminology}
 
 At this point, you are saying one of two things:
@@ -180,6 +180,251 @@ Notice how I've been talking about \emph{sequences}. By that, I mean that two gr
     }
 \end{figure}
 
+\begin{terminology}
+    We use the term \textbf{link}\index{Link} to refer to each part of a chain sequence. In the example above, the blues constitute the first link, while the reds and greens together constitute the second link.
+\end{terminology}
+
+\begin{terminology}
+    \textbf{Power chain}\index{Power chain} is a loose term used to describe chains where multiple groups pop in a single link. It can also be used for chains with really big groups.
+\end{terminology}
+
+\begin{terminology}
+    \textbf{Power bonus}\index{Power bonus} is the extra damage a chain sends for having extra puyos or groups per link.
+\end{terminology}
+
 So why am I talking about chain lengths? That's what we'll see next.
 
-\section{Game objective}
+\subsection{Game objective}
+
+The game's objective depends on what you are playing. If you are playing practice mode, or any other single-player mode (such as the score and time challenges from Puyo Puyo Champions), you'll focus on developing a certain type of efficiency, or a self-imposed goal. There are certain skills that you might find easier to develop in single-player, since it puts you under no pressure from other players, allowing you to think more clearly.
+
+I'll focus on \textbf{versus} here. By that, I mean any adversarial mode: whether you're playing against a CPU or another human, the same objective applies.
+
+So, what is your objective in versus mode? Naturally, it's to defeat your opponent. To do that, you need your opponent to \textbf{top out}. A top out occurs when a player fills their third column completely. When that happens, the game can't spawn any pieces on the player's board, and they lose. In most games, you'll see a red X on the topmost slot of the third column. You don't want to put a piece there.
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=12, ncols=6, nhidrows=0]{//bgrrgybgyyrb///}{}
+    \end{puyotikz}
+\end{figure}
+
+Of course, if your opponent also knows the objective, they won't top out by themselves. So how do you make them top out?
+
+\subsection{Sending damage}
+
+Your chains cause damage to the opponent. What's more, the lengthier the chain, the stronger it will be. That's why I've been telling you about that. But how exactly do chains ``damage'' your opponent? Well, if the idea is to make them top out, then you fill their board with garbage!
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=12, ncols=6, nhidrows=0]{nnnnn/nnnnn/nnnnn/nnnnn/nnnnn/nnnnn}{}
+    \end{puyotikz}
+\end{figure}
+
+The ``gray puyos'' on this board are actually \textbf{garbage}\index{Garbage}, or \textbf{nuisance} puyos. These puyos have a few quirky properties that make them quite annoying to deal with. For one, they don't connect with each other, so the garbage in the example above won't pop by itself. To make garbage pop, you have to pop a group of puyos that's \emph{adjacent to it}. Consider this example.
+
+\begin{figure}[H]
+    \centering
+    \href{https://www.puyo.gg/simulator/chain/mjrtn2bt1u}{
+        \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=12, ncols=6, nhidrows=0]{nnnnnr/nnnnnr/nnnnnr/nnnnnr/nnnnn/nnnnn}{}
+        \end{puyotikz}
+    }
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=12, ncols=6, nhidrows=0]{nnnn/nnnn/nnnn/nnnn/nnnnn/nnnnn}{}
+    \end{puyotikz}
+\end{figure}
+
+Another property of garbage\index{Garbage} is that it doesn't fall in pairs, like the pieces you receive. Instead, garbage is sent in bulk. This can create very uncomfortable situations. For example, let's suppose your opponent is building something big, like this.
+
+\begin{figure}[H]
+    \centering
+    \href{https://www.puyo.gg/simulator/chain/mjrtzhrc3n}{
+        \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=12, ncols=6, nhidrows=0]{rrr/gggr/bbbg/yyyb/rrryb/gggbbgr}{}
+        \end{puyotikz}
+    }
+\end{figure}
+
+This is a 7-chain, and that's huge. As we'll see in a moment, it's enough to instantly defeat an opponent. Now, if you manage to make a chain that sends 12 garbage, for example, \emph{all 12 garbage will be sent at once}, like this:
+
+\begin{figure}[H]
+    \centering
+    \href{https://www.puyo.gg/simulator/chain/mjru5ax96k}{
+        \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=12, ncols=6, nhidrows=0]{rrrnn/gggrnn/bbbgnn/yyybnn/rrrybnn/gggbbgrnn}{}
+        \end{puyotikz}
+    }
+\end{figure}
+
+Now your opponent can't access their chain, and they'll have to \textbf{dig}\index{Digging} through the garbage you sent to make their 7-chain work. I recommend trying out this problem for yourself, if you're a beginner. Click on the board above and try to dig through the garbage. See how long it takes you to send the 7-chain! (Tip: You have to place a blue puyo in column 5.)
+
+As you can see, I kind of lied to you. There is an objective in Puyo that precedes beating your opponent, and that is to survive. In the situation above, we aren't really trying to make our opponent top out yet. Instead, we are protecting ourselves by sending enough garbage to our opponent's board that they won't be able to use their chain anymore, which could make \emph{us} top out! Trust me, though, we're only scratching the surface here. And that's perfectly fine when you're a beginner!
+
+\subsubsection{Score system}
+
+Let's talk about how Puyo's garbage system works! We must first look into the game's score system\index{Score}. The score is the number you'll see underneath your board in the games. It tells you how much garbage\index{Garbage} your chain is going to send. The score is determined by \href{https://puyonexus.com/wiki/Scoring}{a pretty complicated formula} that we aren't really interested in. What really matters is that there are four variables involved:
+
+\begin{itemize}
+    \item How many puyos were cleared in the chain.
+    \item How long your chain is.
+    \item How many puyos popped in each group.
+    \item How many groups of different colors popped at the same time.
+\end{itemize}
+
+Once we delve into sophisticated versus tactics, each of these items will become very important. Because all of these things are taken into account, Puyo is a very situational game. For example, depending on the situation, a chain that pops a lot of groups in one link is better than a lengthy chain. This depends entirely on context, though.
+
+\begin{terminology}
+    Dropping the pieces faster (usually by pressing down) is known as \textbf{soft dropping}\index{Soft drop}. You'll notice that soft dropping also increases your score, which is important in very specific circumstances.
+\end{terminology}
+
+To determine how many garbage puyos the opponent will receive, the game divides your chain's score by the \emph{target points}\index{Target points}, a hidden variable that's 70 by default. To send 2 lines of garbage like in the previous example, you would need a score of 840, which lies somewhere between a 2-chain and a 3-chain. This information isn't super useful in the heat of a match, but it becomes relevant when discussing the difference in power between two big chains.
+
+\begin{note}
+    This is a slightly simplified view of the garbage calculation. As explained in the article linked above, the remainder of the division by the target points is stored and included in future calculations.
+\end{note}
+
+\begin{terminology}
+    The target points decrease over time, which means your chains send more damage the longer a match lasts. The \textbf{margin time}\index{Margin time} is a variable you can configure before a match, and it defines how quickly the target points decrease.
+\end{terminology}
+
+\begin{remember}
+    Knowing the numbers will hardly ever help you in Puyo. Intuition is orders of magnitude more important than the math behind the game! To develop your intuition, you'll have to play and see for yourself how strong each attack is.
+\end{remember}
+
+\subsubsection{Garbage in batches}
+
+As I said before, garbage\index{Garbage} is sent in bulk to the opponent. Up to 30 garbage puyos can be sent to the opponent at once, which is equivalent to 5 rows of garbage. When you don't send enough garbage to complete a line, the garbage is sent randomly at the incomplete line. For example, if you send 14 garbage puyos, the two rows at the bottom will be completely filled, but the row on top may fall in multiple different ways.
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=3, ncols=6, nhidrows=0]{nn/nn/nnn/nn/nn/nnn}{}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=3, ncols=6, nhidrows=0]{nnn/nn/nn/nn/nnn/nn}{}
+    \end{puyotikz}
+\end{figure}
+
+\begin{terminology}
+    \textbf{One in six}\index{One in six} is a term you'll hear often in competitive Puyo. It's mostly used in situations where one player sends a single garbage puyo to the opponent's board, and it lands on a spot that breaks the opponent's chain, or makes it inaccessible, or even makes them top out.
+\end{terminology}
+
+Puyo has its own quirky system of symbols to indicate how much garbage your opponent is going to receive. When you send a chain, the symbols start appearing over your opponent's board. This is known as the \textbf{garbage queue}\index{Garbage!Queue}.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{llc}
+        \textbf{Symbol} & \textbf{Name} & \textbf{Amount of garbage}\\
+        \hline
+        \icon{pebble} & Pebble & 1 \\
+        \icon{line} & Line & 6 \\
+        \icon{rock} & Red Rock & 30 \\
+        \icon{star} & Star & 180 \\
+        \icon{moon} & Moon & 360 \\
+        \icon{crown} & Crown & 720\\
+        \hline
+    \end{tabular}
+\end{table}
+
+As an example, if you send \icon{rock}\icon{line}\icon{line} garbage to your opponent, that's $30 + 6 + 6 = 42$ garbage puyos. Once again, the precise math hardly ever matters in a match. You should know that, most of the time, you're in big trouble if you receive a red rock; and you're most likely dead if you receive two.
+
+\subsubsection{All Clear bonus}
+
+Recall that an AC\index{All Clear} happens when you send a chain that empties your board. This triggers a special mechanic that adds a red rock to the damage output of your next chain. This makes ACs especially relevant early in a match, and it can give a big advantage to whoever manages to find an AC first.
+
+\begin{terminology}
+    An \textbf{All Clear start}\index{All Clear!Start} happens when there is a trivial AC at the start of a match. For example, when a match starts with two double reds on the piece preview.
+\end{terminology}
+
+\begin{terminology}
+    \textbf{All Clear fishing}\index{All Clear!Fishing} describes the act of building chains in unusual ways in an attempt to find an AC. This is a risky strategy at higher levels of play.
+\end{terminology}
+
+\subsection{Fighting back}
+
+So far, I've been talking about this game as if you were the only one who can send damage to your opponents -- never the other way around. So here's an important question: what if you're the one under attack? Is there anything you can do to defend yourself?
+
+The oldest games in the Puyo series \emph{didn't give you any way to fight back}. The star, moon and crown symbols didn't even exist back then, because they would've been useless. Thankfully, it wasn't long before the \textbf{offset system}\index{Offset} was invented. Its premise is simple: in order to counter the opponent's attack, you have to send a stronger attack!
+
+Let's look at an example. Suppose you're playing versus, and your opponent (right side) starts sending their chain.
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=12, ncols=6, nhidrows=0]{rg/rg/rg/br/b/byy}{gy/yb}
+    \end{puyotikz}
+    \href{https://www.puyo.gg/simulator/chain/mjsrbjim10}{
+        \begin{puyotikz}[\puyobigscale]
+            \puyoboard[nrows=12, ncols=6, nhidrows=0]{rrr/bbbr/gggb/g/y/y}{gy/yb}
+        \end{puyotikz}
+    }
+\end{figure}
+
+The opponent has a 3-chain, and it'll send \icon{line}\icon{line}\icon{pebble}\icon{pebble} (2 lines and 2 randomly placed pebbles). What do you do here?
+
+The first thing to keep in mind is that no garbage will fall on your board until the following sequence of events happens:
+
+\begin{enumerate}
+    \item The opponent's chain resolves.
+    \item You place a piece on the board.
+\end{enumerate}
+
+So, you're actually safe for a few seconds. And luckily, you have many response options here! Here's what many desperate beginners would do:
+
+\begin{enumerate}
+    \item Notice the incoming chain.
+    \item Panic!
+    \item Notice that they can send a 2-chain with the blues ($B \rightarrow R$).
+    \item Throw the first piece on the preview to the right.
+    \item Send the 2-chain with the blues.
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \href{https://www.puyo.gg/simulator/chain/mjss4war5h}{
+        \begin{puyotikz}[\puyobigscale]
+            \puyoboard[nrows=12, ncols=6, nhidrows=0]{rg/rg/rg/br/bby/byygy}{}
+        \end{puyotikz}
+    }
+\end{figure}
+
+The result is the most basic 2-chain, totalling \icon{pebble}\icon{pebble}\icon{pebble}\icon{pebble}\icon{pebble} (5) garbage puyos. Let's do the math: the opponent sent 14 garbage to your queue, and you responded with 5 garbage. That means you take $14 - 5 = 9$ garbage of damage instead. This is how you use the offset system to \emph{reduce the damage you take}.
+
+Let's explore three different scenarios now. Can you figure out how to arrive at these board states using the piece preview? Which one do you think is better?
+
+\begin{figure}[H]
+    \centering
+    \href{https://www.puyo.gg/simulator/chain/mjsst1c836}{
+        \begin{puyotikz}[\puyobigscale]
+            \puyoboard[nrows=12, ncols=6, nhidrows=0]{rg/rg/rg/br/bgy/byyyb}{}
+        \end{puyotikz}
+    }
+    \href{https://www.puyo.gg/simulator/chain/mjsstwa26d}{
+        \begin{puyotikz}[\puyobigscale]
+            \puyoboard[nrows=12, ncols=6, nhidrows=0]{rg/rg/rg/brgy/bby/byy}{}
+        \end{puyotikz}
+    }
+    \href{https://www.puyo.gg/simulator/chain/mjssujzwx}{
+        \begin{puyotikz}[\puyobigscale]
+            \puyoboard[nrows=12, ncols=6, nhidrows=0]{rg/rg/rg/brg/byyb/byy}{}
+        \end{puyotikz}
+    }
+\end{figure}
+
+All of these are 3-chains. The first one has pop order $Y \rightarrow B \rightarrow R$. Every link in this chain matches every link in the opponent's chain: only one group pops per link, and every group has 4 puyos. Hence, this chain also sends \icon{line}\icon{line}\icon{pebble}\icon{pebble} garbage. As a result, you receive no garbage! This is known as a \textbf{perfect counter}\index{Perfect counter}.
+
+\begin{note}
+    Perfect counters are so rare that they are almost guaranteed to surprise players and spectators alike. However, they usually give a slight advantage to the opponent, since they have time to build a new chain while your chain is offsetting theirs.
+\end{note}
+
+The chain in the middle has pop order $B \rightarrow (G, R) \rightarrow Y$. This chain matches the opponent's in chain length and number of puyos popped in each group; however, it pops two groups in the second link. This makes it a stronger chain, and sends \icon{line}\icon{line}\icon{line}\icon{pebble}\icon{pebble}\icon{pebble} (21 garbage). Since this is more garbage than what the opponent sent, you end up \emph{countering} the opponent, and sending $21 - 14 = 7$ garbage their way.
+
+How about the chain on the right? This one has pop order $Y \rightarrow B \rightarrow (G, R)$. As you might expect, this chain is also stronger than the opponent's, for the same reason as before. However, it is also stronger than the chain in the middle, because the reds and greens pop in the third link. This chain sends a whopping \icon{line}\icon{line}\icon{line}\icon{line}\icon{pebble}\icon{pebble} (26 garbage), totalling 2 lines of garbage against the opponent.
+
+\begin{remember}
+    Power chains tend to be stronger when the power bonus happens closer to the end of the chain.
+\end{remember}
+
+Notice that the last 2 chains result in ACs, so you'll send 5 extra rows of garbage the next time you send a chain. So not only are they stronger than the perfect counter -- they are \emph{much} stronger. But that doesn't mean the game is over for your opponent! While you're busy offsetting their chain, they have time to build a new chain, which gives them the chance to \emph{counter your counter}! This back-and-forth is called a \textbf{volley}\index{Volley}. Volleys last longer when both players build big chains. That's because longer chains give players more time to prepare a counter. There's \href{https://youtu.be/UXNnO20vy-c?si=Gf1ifRKK8fuzeNLi}{a popular TAS\footnote{TAS stands for Tool Assisted Speedrun, and it's often used to refer to video game footage where the player uses specialized software to access the game's memory and input commands frame by frame, resulting in ``perfect'' gameplay.} video} that showcases an 8-minute match full of volleys!
