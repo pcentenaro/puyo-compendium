@@ -16,7 +16,7 @@ In fact, the goal of this section is to argue for the opposite: that Puyo Puyo i
 
 \subsection{Basic elements}
 
-There are two elements that are indispensable for any Puyo game. The first is the \textbf{board}, which is just a grid where you can place puyos. The second is, well, the \textbf{puyos}! Here is an example of a board with a few puyos.
+There are two elements that are indispensable for any Puyo game. The first is the \textbf{board}\index{Board}, which is just a grid where you can place puyos. The second is, well, the \textbf{puyos}! Here is an example of a board with a few puyos.
 
 \begin{figure}[h]
     \centering
@@ -107,7 +107,11 @@ Once the greens pop, we get this:
 Great! With just one piece, we got rid of \emph{two} groups! On top of that, our board is now empty -- which, as we'll see, gives us an interesting advantage in competitive Puyo!
 
 \begin{terminology}
-    An \textbf{all clear}\index{All Clear} (AC) happens when you pop all the puyos on your board, leaving it empty. Note that the empty board state at the start of a match doesn't count as an all clear!
+    An \textbf{All Clear}\index{All Clear} (AC) happens when you pop all the puyos on your board, leaving it empty. Note that the empty board state at the start of a match doesn't count as an all clear!
+\end{terminology}
+
+\begin{terminology}
+    The \textbf{trigger}\index{Trigger} is the group of puyos you pop in order to start a chain. In this example, it's the greens.
 \end{terminology}
 
 At this point, you are saying one of two things:
@@ -428,3 +432,198 @@ How about the chain on the right? This one has pop order $Y \rightarrow B \right
 \end{remember}
 
 Notice that the last 2 chains result in ACs, so you'll send 5 extra rows of garbage the next time you send a chain. So not only are they stronger than the perfect counter -- they are \emph{much} stronger. But that doesn't mean the game is over for your opponent! While you're busy offsetting their chain, they have time to build a new chain, which gives them the chance to \emph{counter your counter}! This back-and-forth is called a \textbf{volley}\index{Volley}. Volleys last longer when both players build big chains. That's because longer chains give players more time to prepare a counter. There's \href{https://youtu.be/UXNnO20vy-c?si=Gf1ifRKK8fuzeNLi}{a popular TAS\footnote{TAS stands for Tool Assisted Speedrun, and it's often used to refer to video game footage where the player uses specialized software to access the game's memory and input commands frame by frame, resulting in ``perfect'' gameplay.} video} that showcases an 8-minute match full of volleys!
+
+\subsection{Random number generator}
+
+By now, I believe it's become clear just how different Puyo is from other puzzle games, and why some even go as far as to call it a fighting game. For all intents and purposes, there is an infinite number of single-player games. Versus mode creates even more possibilities. Chains are akin to combos in a fighting game, and responding to attacks requires great vision and understanding of various mechanics and strategies that we have yet to explore.
+
+But I would argue that Puyo's most defining feature is its random number generator (RNG)\index{Random number generator}. RNG exists in most modern games, and it's basically an algorithm that allows random\footnote{RNG in games is actually \emph{pseudo-random}. Usually, the computer takes a variable (for example, the current time) and applies a bunch of formulas to it. The result is a seemingly random number.} events to occur. In Puyo, the RNG is responsible for generating the pieces that you receive. This is a game changer, because it introduces unpredictability to the game.
+
+Let's explore a simple example. I showed you plenty of horizontal stacks in previous sections. So let's say you're very excited to practice. You close this compendium and open a Puyo game. You can't wait to build a stack like this.
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=5, ncols=6, nhidrows=0]{ybpby/ybpp/ybp}{}
+    \end{puyotikz}
+\end{figure}
+
+Ideally, you'd want a piece preview like this: $YB \rightarrow YB \rightarrow YB \rightarrow PB \rightarrow PP \rightarrow PY$. This is highly unlikely! Let's look at a few roadblocks that might emerge as you try to build this chain.
+
+\subsubsection{Roadblock 1: Unwanted pieces}
+
+This one is really common. In our ideal world, we only use 3 different colors for our chain. However, in standard games, we have 4 colors to work with. So situations like this are very common.
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=5, ncols=6, nhidrows=0]{ybpb/yb}{rr/ry}
+    \end{puyotikz}
+\end{figure}
+
+What do you do with those reds that showed up all of a sudden? What most beginners do is throw \textbf{unwanted pieces}\index{Unwanted piece} to the side -- often column 6. This is completely fine when you're still learning how to chain, but it becomes a harmful habit after you reach a certain level of competence. Here's an example of what a beginner would likely do (left), versus an experienced player (right).
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=5, ncols=6, nhidrows=0]{ybpb/yb////rryr}{}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=5, ncols=6, nhidrows=0]{ybpb/yb/y/r/r/r}{}
+    \end{puyotikz}
+\end{figure}
+
+The chain on the right is better for a few reasons: (a) it completes the group of yellows; (b) it creates a group of reds that's ready to pop; (c) the reds can be added as a fourth link in the chain (as shown below); (d) it makes the board more even in terms of height (a very important thing that we will discuss later).
+
+\begin{figure}[H]
+    \centering
+    \href{https://www.puyo.gg/simulator/chain/mjsxs4kk3w}{
+        \begin{puyotikz}[\puyobigscale]
+            \puyoboard[nrows=5, ncols=6, nhidrows=0]{ybpby/ybpp/ybpr/r/r/r}{}
+        \end{puyotikz}
+    }
+\end{figure}
+
+\begin{remember}
+    Most unwanted pieces are only unwanted in the short term. The most efficient players think many steps ahead when placing seemingly useless pieces.
+\end{remember}
+
+\subsubsection{Roadblock 2: Drought}
+
+A \textbf{drought}\index{Drought} occurs when one or more colors take too long to appear in the preview. Droughts can be extremely painful when you need a certain color to complete your chain. Let's take advantage of the previous example to elaborate on this. Suppose you're in this pickle when trying to build your ideal chain.
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{ybpb/yb/y/r/r/r}{yb/rb}
+    \end{puyotikz}
+\end{figure}
+
+No purples in sight! This chain is quickly becoming unsustainable. Let's first look at 3 possibilities on how to proceed.
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{ybpb/yb/y/r/r/rybrb}{}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{ybpbby/yb/ybr/r/r/r}{}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{ybpbby/yb/yr/rb/r/r}{}
+    \end{puyotikz}
+\end{figure}
+
+Now let's discuss each one of these, from left to right.
+
+\begin{enumerate}
+    \item This, again, is panic-mode beginner stuff. You're not really looking for a solution here, you're just trying to build exactly what you have in mind. This is bad, and if the drought worsens, so does your chain!
+    \item A more level-headed player's approach. You acknowledge that it's okay for the chain to be a bit different from what you envisioned, hence the blue-yellow on \texttt{5a}. You even make use of the reds! This is much better than option 1, but now the purples are in a bit of an awkward spot, since column 3 is taken by a red puyo.
+    \item A very classy option! Just like the previous chain, you're making sure the yellows will pop. Plus, the red-blue was placed in a way that allows you to extend the purples as envisioned, with the reds still connecting at the end of the chain. This is the best option of the bunch.
+\end{enumerate}
+
+Now I present an unintuitive possibility to you.
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{ybpb/yb/yb/ryb/rr/r}{bb/yb}
+    \end{puyotikz}
+\end{figure}
+
+This one is a big brain move, and it's actually better than number 3 above depending on the situation. Take a look at the piece preview. There's still no purple coming. Now, your opponent probably depends on purples to make their chain work, as well. So, while they wait to receive the purples, you build a \textbf{secondary trigger}\index{Secondary trigger} with the reds, which results in a power 2-chain. This sends \icon{line}\icon{line}\icon{pebble} to your opponent! Two lines of garbage plus a drought is a huge hit, and it might determine your opponent's fate if you keep playing well.
+
+\begin{note}
+    I would not recommend building this attack if, instead of $BB \rightarrow BY$, the piece preview contained purples. You'd be risking a counter from your opponent.
+\end{note}
+
+Lastly, I'd like to bring this possibility up.
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{ybpbby/yb/yb/rr/r/r}{}
+    \end{puyotikz}
+\end{figure}
+
+This one is unintuitive because many players (not just beginners!) have a hard time realizing that it's okay to pop a few groups here and there to make your life easier. The world won't end if you just get rid of the reds here! While I don't think this is the best option, it might make your life easier, so you can go for it.
+
+\subsubsection{Roadblock 3: Bad piece order}
+
+Sometimes you receive exactly the pieces you need to build a chain, but you have a hard time figuring out how to build it, because you had a different build order in mind. At the start of this section, I mentioned that you'd probably want this sequence of pieces in the piece preview: $YB \rightarrow YB \rightarrow YB \rightarrow PB \rightarrow PP \rightarrow PY$. That's because I'm assuming most people would find it easier to build this chain like this.
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=6, ncols=3, nhidrows=0]{yb/////}{}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=6, ncols=3, nhidrows=0]{yb/yb////}{}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=6, ncols=3, nhidrows=0]{yb/yb/yb///}{}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=6, ncols=3, nhidrows=0]{ybpb/yb/yb///}{}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=6, ncols=3, nhidrows=0]{ybpb/ybp/ybp///}{}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=6, ncols=3, nhidrows=0]{ybpby/ybpp/ybp///}{}
+    \end{puyotikz}
+\end{figure}
+
+What if you received a sequence such as $YB \rightarrow PY \rightarrow BP \rightarrow BY \rightarrow BY \rightarrow PP$? Then you'd have to build the chain like this.
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=6, ncols=3, nhidrows=0]{yb/////}{}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=6, ncols=3, nhidrows=0]{ybp/y////}{}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=6, ncols=3, nhidrows=0]{ybp/ybp////}{}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=6, ncols=3, nhidrows=0]{ybp/ybp/yb///}{}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=6, ncols=3, nhidrows=0]{ybpby/ybp/yb///}{}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=6, ncols=3, nhidrows=0]{ybpby/ybpp/ybp///}{}
+    \end{puyotikz}
+\end{figure}
+
+Looks awkward? That's because it is. Once we start discussing ways to build reliable chains, you'll realize that there are certain sequences of pieces that fit comfortably into your chain; and then there are sequences that you struggle to put together. Generally, you want to avoid the latter. If a sequence doesn't work well for a certain chain pattern, it'll probably be good for a different pattern. Flexibility is key.
+
+\subsubsection{Roadblock 4: Garbage}
+
+If your opponent gets enough score very early on in the match, they can use it to pop a quick 1- or 2-chain that sends very little garbage to your board. Depending on where the garbage falls (which depends on RNG!) your life might become hell all of a sudden. Look at these examples of what could happen.
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=6, ncols=3, nhidrows=0]{ybp/yb/nb///}{}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=6, ncols=3, nhidrows=0]{ybp/yn/yb///}{}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=6, ncols=3, nhidrows=0]{ybn/ybn/ybn///}{}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \puyoboard[nrows=6, ncols=3, nhidrows=0]{nbpb/ybpp/ybp///}{}
+    \end{puyotikz}
+\end{figure}
+
+All of these examples force you to deviate from your original chaining plan. Of course, you can always try to clear the garbage to rebuild the chain you envisioned at the start, but that takes too much time, and it only gets worse thanks to the other roadblocks. Thankfully, this is a rather rare roadblock; but certain opponents exploit this rarity really well!
+
+\subsection{Conclusion}
+
+If you made it this far, you now understand that Puyo is a puzzle fighting game with simple, yet challenging mechanics, and plenty of things to consider, even at the most basic level. Most importantly, you're now aware that it's definitely not Candy Crush.
+
+If this introduction felt like information overload, don't worry! Take it easy. My goal here was to introduce a bunch of concepts to you, and some of them are hard to grasp at first. The next chapters will focus on specific topics, and hopefully you won't find my logic hard to follow.

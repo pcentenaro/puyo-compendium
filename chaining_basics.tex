@@ -1,0 +1,254 @@
+\chapterimage{puyobg.jpg} % Chapter heading image
+\chapterspaceabove{6.75cm} % Whitespace from the top of the page to the chapter title on chapter pages
+\chapterspacebelow{7.25cm} % Amount of vertical whitespace from the top margin to the start of the text on chapter pages
+
+\chapter{Chaining basics}
+
+In the previous chapter, I showed you a few different chains, but I didn't take the time to explain much about them. That's because I wanted you to focus on game mechanics such as gravity and garbage. In this chapter, we'll actually focus on the rationale behind chains, and how to build them consistently.
+
+\section{Blocking method}
+
+At the heart of Puyo lies the \textbf{blocking method}\index{Blocking method}. This is what you'll rely on as you're learning how to play, but it's also the guiding principle for any kind of chain you can build.
+
+Here's what the blocking method is all about. Suppose you have a group of puyos like the blues on the left. If you want to build a 2-chain with it, you need another group to act as a trigger. After you pop the trigger, \emph{gravity} comes into play, and the blues are supposed to pop in the second link. Gravity implies that something must fall, and that something is \emph{another blue}.
+
+\begin{figure}[h]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=4, ncols=6, nhidrows=0]{b/b/b}{}
+    \end{puyotikz}
+\end{figure}
+
+So, if we want to pop the blues in the second link, we need to \emph{block a fourth blue} with our trigger. Here are a few ways to do this, with the reds acting as the trigger.
+
+\begin{figure}[h]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=4, ncols=6, nhidrows=0]{br/brb/br}{}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=4, ncols=6, nhidrows=0]{b/b/b/rb/r/r}{}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=4, ncols=6, nhidrows=0]{brr/brb/b}{}
+    \end{puyotikz}
+\end{figure}
+
+In other words, the blocking method is all about blocking the connection between puyos in a group, using puyos from another group. Here's another example, using pillars this time. In all of these cases, popping the reds results in a 2-chain.
+
+\begin{figure}[h]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=5, ncols=6, nhidrows=0]{//bbb/rrrb}{}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=5, ncols=6, nhidrows=0]{//bbb/rrgb/r}{}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=5, ncols=6, nhidrows=0]{//rrrb/b/b/b}{}
+    \end{puyotikz}
+\end{figure}
+
+In the context of the blocking method, the lonely blue that falls to complete our chain is called \textbf{key puyo}\index{Key puyo}. It's very important to keep track of your key puyos, otherwise your chains won't work as intended. For now, I recommend that you always try to place the key puyo as soon as you can, and don't do anything to it afterwards. This will help you develop the muscle memory needed to make bigger chains.
+
+\subsection{Example: 3-chain}
+
+Let's go through an example together. I used \href{https://www.puyo.gg/simulator/chain}{puyo.gg} to get a random sequence of pieces. We start with $BG \rightarrow BY$ on our piece preview. I'll describe my actions step by step below.
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{}{bg/yb}
+        \puyomarker{a1gA/b1bA}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{g/b}{yb/by}
+        \puyomarker{c1bA/c2yA}
+    \end{puyotikz}
+\end{figure}
+
+\begin{enumerate}
+    \item I notice that there are \emph{two blues} coming. I will take advantage of this to start grouping them together. For now, let's not worry about where I place the first piece, and let's put green on \texttt{1a}, blue on \texttt{1b}.
+    \item There's yet another blue! This is great, because we will be able to complete a group of 3 blues. This will be our priority for now. I decided to place blue on \texttt{1c}, yellow on \texttt{2c}.
+\end{enumerate}
+    
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{g/b/by}{by/ry}
+        \puyomarker{d1bA/d2yA}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{g/b/by/by}{ry/yy}
+        \puyomarker{a2rA/b2yA}
+    \end{puyotikz}
+\end{figure}
+
+\begin{enumerate}[start=3]
+    \item Notice that we're now getting plenty of yellows. It's probably a good idea to group them, too. I'll place blue on \texttt{1d} and yellow on \text{2d}, which completes our group of blues.
+    \item Let's complete our group of yellows with the yellow-red. We can put it in many places; I choose red on \texttt{2a} and yellow on \texttt{2b}, just to keep our stack nice.
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{gr/by/by/by}{yy/yb}
+        \puyomarker{f1yA/f2yA}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{gr/by/by/by//yy}{yb/yr}
+        \puyomarker{d3bA/d4yA}
+    \end{puyotikz}
+\end{figure}
+
+\begin{enumerate}[start=5]
+    \item This double yellow doesn't help us. If we pop the yellows right now, that'll only be a 1-chain. Remember: we still need a blue key puyo on top of the yellows! Let's put the yellows somewhere where they won't ruin our chain, like column 6.
+    \item Now we get exactly the piece we need to trigger our chain! We can place the yellow-blue on columns 2, 3 or 4, without rotating it, and that'll give us a 2-chain. While that's great, I'll be greedy and aim for a 3-chain instead. Notice that there's a red-yellow coming. We will use the yellow as a key puyo, and block it with the reds! But first, let's flip the blue-yellow and place it on column 4.
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{gr/by/by/byby//yy}{yr/rb}
+        \puyomarker{a3rA/a4yA}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{grry/by/by/byby//yy}{rb/ry}
+        \puyomarker{b3rA/b4bA}
+    \end{puyotikz}
+\end{figure}
+
+\begin{enumerate}[start=7]
+    \item Let's block the yellows with the reds, as I said previously.
+    \item Now we see the two reds we need to trigger our chain. From here, I think it's pretty clear what we have to do!
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{grry/byrb/by/byby//yy}{ry/gy}
+        \puyomarker{c3rA/c4yA}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{grry/byrb/byry/byby//yy}{gy/gy}
+    \end{puyotikz}
+\end{figure}
+
+Voila! We have a 3-chain. The pop order is $R \rightarrow Y \rightarrow B$.
+
+I'd like to stress that, in a real match, you have a limited amount of time to make these decisions, so it's harder to get things right. At first, I recommend trying to build as many groups as you can, even if it's hard to visualize what chains you can make. You might make chains on accident, which can actually help you learn how to chain!
+
+\subsection{Example: Pillars into stairs}
+
+Let's look at another example. This time, we have an All Clear\index{All Clear!Start} start! There's no point in trying to use these greens for anything else -- let's get that AC!
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{}{gg/gg}
+        \puyomarker{c1gA/c2gA/c3gB/c4gB}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{}{gb/gy}
+        \puyomarker{c1gA/d1bA}
+    \end{puyotikz}
+\end{figure}
+
+\begin{enumerate}
+    \item Let's just pop those two greens to get our AC. If this were the actual game, an ``All Clear!'' text would pop up on the board, and it would stay there until we sent a new chain.
+    \item Now we notice the presence of two greens on the piece preview. Let's try to group them together. This time, I'll try to build a pillar, so I'll leave empty space on top of the first green.
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{//g/b//}{gy/gy}
+        \puyomarker{c2gA/c3gB/b1yA/b2yB}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{/yy/ggg/b//}{yb/rg}
+        \puyomarker{b3yA/c4bA}
+    \end{puyotikz}
+\end{figure}
+
+\begin{enumerate}[start=3]
+    \item We get two green-yellows. We can use the two greens to complete our pillar. We can place the yellow on top of the blues, or leave them in column 2. Let's do the latter.
+    \item The yellow-blue is a pretty ambiguous piece here. We can use the yellow to complete the yellow group, or we can connect the blues. Let's do the former and place the yellow in column 2. Let's also place the blue in column 3, to serve as a key puyo!
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{/yyy/gggb/b//}{rg/gr}
+        \puyomarker{b4gA/b5rA/e1rB/f1gB}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{/yyygr/gggb/b/r/g}{rr/gr}
+        \puyomarker{e2rA/e3rA/e4gB/e5rB}
+    \end{puyotikz}
+\end{figure}
+
+\begin{enumerate}[start=5]
+    \item We get two red-greens. Since we need a green key puyo, let's put the first piece in column 2. The other piece doesn't seem very useful, so let's put it on the right. Notice how I'm rotating the second piece in order to occupy columns 5 and 6. I'm doing this in case we want to build more pillars!
+    \item We keep getting reds... This is a bit annoying, but at least we can build another pillar, and then put the following piece in a place where it won't cause harm, such as column 5. Actually, if we get lucky and receive two more greens, we can complete a pillar in column 6, and our green in column 5 will become a key puyo!
+\end{enumerate}
+
+\begin{note}
+    Remember that this practice started with an AC! In a real match, you might just want to pop the greens on step 5. For absolute beginners, it's safer to just send the AC as soon as possible.
+\end{note}
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{/yyygr/gggb/b/rrrgr/g}{gb/gg}
+        \puyomarker{d2bA/c5gA/f3gB/f2gB}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{/yyygr/gggbg/bb/rrrgr/ggg}{gb/ry}
+        \puyomarker{c6gA/d3bA/d4rB/d5yB}
+    \end{puyotikz}
+\end{figure}
+
+\begin{enumerate}[start=7]
+    \item Lucky us! These pieces are pretty good. We really need to finish our blue pillar, so let's do that with the first piece. Let's leave the green on column 3, so it doesn't get in the way of the blues. The double green is a perfect piece to complete the pillar in column 6!
+    \item We struck gold again. Let's complete our blue pillar with the first piece! With the second piece, we could trigger our chain with the yellow. That would give us a 3-chain, like before. However, that would leave our red and green pillar unused. Let's instead use the yellow-red to create a red key puyo in our chain!
+\end{enumerate}
+
+At this point, we have so many puyos on the board that I'll have to increase its vertical size. Anyway, our chain is pretty much complete! Now we just need yellows. I had to fish for yellows, but I won't bore you with the details. While waiting, I threw a bunch of unwanted pieces to the right, and this is the chain I ended up making.
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=12, ncols=6, nhidrows=1]{yy/yyygr/gggbgg/bbbry/rrrgr/gggrrbrgbbrrb}{rg/br}
+    \end{puyotikz}
+\end{figure}
+
+Looks kind of messy, huh? But it's a 5-chain, which is great! Usually, a 5-chain is enough to beat an opponent who doesn't fight back. With the AC we got at the start, this chain is guaranteed to beat anyone who can't muster a strong chain.
+
+If you've read the previous chapter, you might recall that I talked very briefly about stairs. The chain we just built is exactly that! Admittedly, we got pretty lucky with the RNG -- stairs isn't always this simple to build. But hopefully I explained my thought process well enough, and this big chain doesn't seem too intimidating to you.
