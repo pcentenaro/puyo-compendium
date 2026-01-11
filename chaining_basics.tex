@@ -252,3 +252,101 @@ At this point, we have so many puyos on the board that I'll have to increase its
 Looks kind of messy, huh? But it's a 5-chain, which is great! Usually, a 5-chain is enough to beat an opponent who doesn't fight back. With the AC we got at the start, this chain is guaranteed to beat anyone who can't muster a strong chain.
 
 If you've read the previous chapter, you might recall that I talked very briefly about stairs. The chain we just built is exactly that! Admittedly, we got pretty lucky with the RNG -- stairs isn't always this simple to build. But hopefully I explained my thought process well enough, and this big chain doesn't seem too intimidating to you.
+
+\subsection{Example: L-shape}
+
+Let's look at another example! We start with double blue-reds.
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{}{br/br}
+        \puyomarker{a1rA/b1bA/c1bB/b2rB}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{r/br/b}{gg/bb}
+        \puyomarker{d1gA/e1gA/c2bB/b3bB}
+    \end{puyotikz}
+\end{figure}
+
+\begin{enumerate}
+    \item Let's start placing the pieces. So far, we've been aiming only for pillars and cushions\index{Cushion} (the horizontal groups). This time, I want to build groups shaped like an L!
+    \item With these pieces, we can begin to build L-shapes\index{L-shape}! Let's lay the greens flat in columns 4 and 5. Then, we can use the blues to create an L-shape! Notice how the blue on \texttt{3b} now works as a key puyo for the blues from the L-shape.
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{r/brb/bb/g/g}{bp/bg}
+        \puyomarker{f1bA/f2pA}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{r/brb/bb/g/g/bp}{bg/pb}
+        \puyomarker{d2gA/e2bA}
+    \end{puyotikz}
+\end{figure}
+
+\begin{enumerate}[start=3]
+    \item Now that we have two greens on the board, we're one step closer to making another L-shape. We don't know what to do with the first piece on the preview, so let's put it in column 6.
+    \item We can place the green from the next piece in columns 4 or 5. Which one do you think is better? I'll place it in column 4, because it keeps the chain rather flat. As we'll see later on, flat chains are generally better than chains full of height differences between the columns!
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{r/brb/bb/gg/gb/bp}{pb/bb}
+        \puyomarker{f3pA/f4bA/d3bB/e3bB}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=6, ncols=6, nhidrows=0]{r/brb/bb/ggb/gbb/bppb}{rr/bp}
+        \puyomarker{a2rA/b4rA/e4pB/f5bB}
+    \end{puyotikz}
+\end{figure}
+
+\begin{enumerate}[start=5]
+    \item We don't have much use for the blue-purple. Let's put it in column 6. The double blue can be placed in columns 4 and 5 to complete an L-shape with the blues. Can you see how these blues will connect with the one at the bottom of column 6? That's right! That's our key puyo!
+    \item The double red allows us to complete another L-shape with the reds! Let's drop one of the reds in column 2; we don't want to send our chain yet! The blue-purple isn't very useful now, so I'll throw it to the right. But the right side of our chain doesn't have to be useless! Let's try to pop some of the stuff there. If I put the purple in column 5, then I'll only need another purple to complete a group of 4 at the end of the chain!
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=9, ncols=6, nhidrows=0]{rr/brbr/bb/ggb/gbbp/bppbb}{pr/pr}
+        \puyomarker{e5pA/e6pB/f6rA/f7rB}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=9, ncols=6, nhidrows=0]{rr/brbr/bb/ggb/gbbppp/bppbbrr}{rr/bp}
+        \puyomarker{e7rA/e8rA/f8bB/f9pB}
+    \end{puyotikz}
+\end{figure}
+
+\begin{enumerate}[start=7]
+    \item We don't have much use for the blue-purple. Let's put it in column 6. The double blue can be placed in columns 4 and 5 to complete an L-shape with the blues. Can you see how these blues will connect with the one at the bottom of column 6? That's right! That's our key puyo!
+    \item Lo and behold, more unwanted stuff! Let's just pop the reds in column 6, and then place the blue-purple there.
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=7, ncols=6, nhidrows=0]{rr/brbr/bb/ggb/gbbppp/bppbbbp}{gg/rg}
+        \puyomarker{c3gA/c4gA/a3rB/a4gB}
+    \end{puyotikz}
+    \begin{puyotikz}[\puyobigscale]
+        \centering
+        \puyoboard[nrows=7, ncols=6, nhidrows=0]{rrrg/brbr/bbgg/ggb/gbbppp/bppbbbp}{bb/pb}
+    \end{puyotikz}
+\end{figure}
+
+\begin{enumerate}[start=9]
+    \item Now's our chance! These pieces are perfect. By placing the greens in column 3, they become key puyos. Then, we can use the red to trigger our chain.
+    \item This is a 4-chain. Can you see why?
+\end{enumerate}
